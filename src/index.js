@@ -1,6 +1,6 @@
 //https://stackoverflow.com/questions/54086244/semantic-ui-react-style-not-loaded
 //if semantic still not loading, do link above
-
+import './style/App.css';
 import React from 'react';
 //import  ReactDOM from 'react-dom';
 import {createRoot} from 'react-dom/client';
@@ -17,15 +17,22 @@ class App extends React.Component {
     );
   }
 
-//below is 'conditional rendering'; simplest version
-  render() {
+  renderContent () {
     if (this.state.errorMessage && !this.state.lat) {
       return <div>Error: {this.state.errorMessage}</div>
     }
     if(!this.state.errorMessage && this.state.lat) {
       return <SeasonDisplay lat = {this.state.lat} />
     }
-    return <Spinner />;
+    return <Spinner message= "Awaiting your location..."/>;
+  }
+
+  render() {
+    return (
+      <div className="border red">
+        {this.renderContent()}
+      </div>
+    )
   }
 }
 
